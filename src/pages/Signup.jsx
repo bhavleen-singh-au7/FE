@@ -220,18 +220,6 @@ const Signup = ({ history }) => {
           minHeight: "90vh",
         }}
       >
-        <Grid item xs={12} md={6}>
-          {signupForm()}
-          <Paper
-            className={classes.formBottom}
-            variant="outlined"
-          >
-            Have an account{" "}
-            <Link className="link" to="/signin">
-              Log In
-            </Link>
-          </Paper>
-        </Grid>
         <Grid
           item
           xs={12}
@@ -246,6 +234,18 @@ const Signup = ({ history }) => {
             alt="signupsvg"
             className="thumbImage"
           />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          {signupForm()}
+          <Paper
+            className={classes.formBottom}
+            variant="outlined"
+          >
+            Have an account{" "}
+            <Link className="link" to="/signin">
+              Log In
+            </Link>
+          </Paper>
         </Grid>
       </Grid>
     </Fragment>

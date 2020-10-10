@@ -94,10 +94,6 @@ const AccountActivation = ({ match, history }) => {
           minHeight: "90vh",
         }}
       >
-        <Grid item xs={12} md={6}>
-          {accountActivate()}
-        </Grid>
-
         <Grid
           item
           xs={12}
@@ -112,6 +108,10 @@ const AccountActivation = ({ match, history }) => {
             alt="acountsvg"
             className="thumbImage"
           />
+        </Grid>
+
+        <Grid item xs={12} md={6}>
+          {accountActivate()}
         </Grid>
       </Grid>
     </Fragment>

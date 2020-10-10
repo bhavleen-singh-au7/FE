@@ -172,15 +172,7 @@ const Signin = ({ setUser, error, user, removeLoginError, isAuth }) => {
                     minHeight: "90vh",
                 }}
             >
-                <Grid item xs={12} md={6}>
-                    {loginForm()}
-                    <Paper className={classes.formBottom} variant="outlined">
-                        Don't have an account?{" "}
-                        <Link className="link" to="/signup">
-                            Sign Up
-                        </Link>
-                    </Paper>
-                </Grid>
+
                 <Grid
                     item
                     xs={12}
@@ -195,6 +187,15 @@ const Signin = ({ setUser, error, user, removeLoginError, isAuth }) => {
                         alt="loginsvg"
                         className="thumbImage"
                     />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    {loginForm()}
+                    <Paper className={classes.formBottom} variant="outlined">
+                        Don't have an account?{" "}
+                        <Link className="link" to="/signup">
+                            Sign Up
+                        </Link>
+                    </Paper>
                 </Grid>
             </Grid>
         </Fragment>

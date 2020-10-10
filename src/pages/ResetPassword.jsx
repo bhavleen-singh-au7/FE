@@ -186,10 +186,6 @@ const ResetPassword = ({ match }) => {
           minHeight: "100vh",
         }}
       >
-        <Grid item xs={12} md={6}>
-          {resetPasswordForm()}
-        </Grid>
-
         <Grid
           item
           xs={12}
@@ -204,6 +200,9 @@ const ResetPassword = ({ match }) => {
             alt="securesvg"
             className="thumbImage"
           />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          {resetPasswordForm()}
         </Grid>
       </Grid>
     </Fragment>
