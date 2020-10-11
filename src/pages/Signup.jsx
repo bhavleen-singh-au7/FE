@@ -130,9 +130,8 @@ const Signup = ({ history }) => {
           password: "",
         });
 
-        setOpen(false);
-
         toast.success(response.data.message);
+        setOpen(false);
 
         setTimeout(() => {
           history.push("/signin");
@@ -141,6 +140,7 @@ const Signup = ({ history }) => {
       .catch((error) => {
         setValues({ ...values });
         toast.error(error.response.data.error);
+        setOpen(false);
       });
   };
 

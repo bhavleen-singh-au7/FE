@@ -20,10 +20,6 @@ export const setUserLogin = (userData) => {
       });
     } catch (e) {
       console.log(e);
-      // dispatch({
-      //     type: "SET_LOGIN_ERROR",
-      //     payload: e.response.data.error,
-      // });
     }
   };
 };
@@ -39,6 +35,9 @@ export const setUserSignout = () => {
       };
       await httpRequest(option);
       dispatch({ type: "SET_LOGOUT_SUCCESS" });
+      localStorage.removeItem("user_info");
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("user");
     } catch (e) {
       console.log(e);
     }

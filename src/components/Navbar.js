@@ -74,12 +74,11 @@ const Navbar = (props) => {
               </Link>
               <Link to="/" className="underline">
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   onClick={handleClick}
+                  color="primary"
                 >
-                  <Typography variant="button">
-                    Signout
-                  </Typography>
+                  Signout
                 </Button>
               </Link>
             </Fragment>
