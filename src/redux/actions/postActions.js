@@ -24,7 +24,6 @@ export const setPublicPosts = () => async (dispatch) => {
       method: "GET",
     };
     const res = await httpRequest(option);
-    console.log(res);
     dispatch({ type: "SET_POSTS", payload: res.data });
   } catch (e) {
     console.log(e);
@@ -41,7 +40,6 @@ export const setFollowUser = (userId) => async (
       method: "PUT",
     };
     const res = await httpRequest(option);
-    console.log(res.data);
     dispatch({
       type: "SET_FOLLOW_USER",
       payload: res.data.followers,
@@ -65,7 +63,6 @@ export const setUnFollowUser = (userId) => async (
       method: "PUT",
     };
     const res = await httpRequest(option);
-    console.log(res.data);
     dispatch({
       type: "SET_FOLLOW_USER",
       payload: res.data.followers,
@@ -162,7 +159,6 @@ export const addComment = (postId, formData) => async (
       data: formData,
     };
     const res = await httpRequest(option);
-    console.log(res);
     dispatch({
       type: "ADD_COMMENT",
       payload: { data: res.data, postId },
@@ -185,7 +181,6 @@ export const addUserComment = (postId, formData) => async (
       data: formData,
     };
     const res = await httpRequest(option);
-    console.log(res);
     dispatch({
       type: "ADD_COMMENT",
       payload: { data: res.data, postId },
@@ -200,7 +195,6 @@ export const addUserComment = (postId, formData) => async (
     console.log(e);
   }
 };
-
 
 // Delete comment
 export const deleteComment = (postId, commentId) => async (

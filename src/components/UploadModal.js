@@ -54,11 +54,9 @@ const TransitionsModal = () => {
       setFile(file);
       setError("");
       setOpen(true);
-      console.log(file);
     } else {
       setError("Please select an image file (png/jpeg)");
       setFile(null);
-      console.log(error);
     }
   };
 

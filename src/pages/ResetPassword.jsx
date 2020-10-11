@@ -109,7 +109,6 @@ const ResetPassword = ({ match }) => {
       data: { newPassword, resetPasswordLink: token },
     })
       .then((response) => {
-        // console.log("RESET PASSWORD SUCCESS", response);
         toast.success(response.data.message);
         setValues({
           ...values,
@@ -117,10 +116,6 @@ const ResetPassword = ({ match }) => {
         });
       })
       .catch((error) => {
-        // console.log(
-        //   "RESET PASSWORD ERROR",
-        //   error.response.data
-        // );
         toast.error(error.response.data.error);
         setValues({
           ...values,

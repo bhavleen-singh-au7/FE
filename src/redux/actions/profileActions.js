@@ -62,7 +62,6 @@ export const updateUserAction = (userData) => async (
       method: "PATCH",
     };
     const res = await httpRequest(option);
-    console.log(res.data.user);
     dispatch({
       type: "SET_USER_UPDATE",
       payload: res.data.user,
@@ -93,16 +92,12 @@ export const updateAvatarAction = (formData) => async (
 
 export const deletePost = (postId) => async (dispatch) => {
   try {
-    console.log(postId);
-    
     const option = {
       url: `posts/${postId}`,
       method: "DELETE",
     };
 
     const res = await httpRequest(option);
-
-    console.log(res);
 
     dispatch({
       type: "DELETE_POST",

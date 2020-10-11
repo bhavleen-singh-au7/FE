@@ -61,7 +61,6 @@ export const loadUser = () => async (dispatch) => {
 export const updateUserAction = (userData) => {
   return async (dispatch) => {
     try {
-      console.log("inside actions");
       const option = {
         data: userData,
         url: "user/me",

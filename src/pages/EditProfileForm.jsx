@@ -109,7 +109,6 @@ const EditProfileForm = ({
     } else {
       setError("Please select an image file (png/jpeg)");
       setFile(null);
-      console.log(error);
     }
   };
 
@@ -175,21 +174,18 @@ const EditProfileForm = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm(errors)) {
-      console.log("Valid form");
       let data = values;
       for (let i in data) {
         if (data[i] === "") {
           delete data[i];
         }
       }
-      console.log(data);
       await updateUserProfile(data);
       toast.success("Profile Updated");
       setTimeout(() => {
         history.goBack();
       }, 1000);
     } else {
-      console.log("Invalid form");
       toast.error("Please provide valid inputs");
     }
   };

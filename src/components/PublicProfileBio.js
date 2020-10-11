@@ -51,7 +51,6 @@ const UserBio = ({
 
             {/* Follow/Unfollow Button  */}
 
-            {console.log(loggedInUser.following, user._id)}
             {loggedInUser.following.some(
               (follow) =>
                 follow.userId.toString() === user._id

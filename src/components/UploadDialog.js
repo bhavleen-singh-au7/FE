@@ -72,12 +72,10 @@ function FormDialog({
     } else {
       setError("Please select an image file (png/jpeg)");
       setFile(null);
-      console.log(error);
     }
   };
 
   const handlePost = (e) => {
-    // console.log(file, caption);
     handleClose();
     const bodyFormData = new FormData();
     bodyFormData.append("caption", caption);
