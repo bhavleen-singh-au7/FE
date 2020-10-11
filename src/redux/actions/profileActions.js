@@ -1,5 +1,4 @@
 import httpRequest from "../../config/axiosConfig";
-import axios from "axios";
 import { toast } from "react-toastify";
 
 export const setProfile = () => async (dispatch) => {
@@ -20,18 +19,11 @@ export const createPost = (data, setShowProgress) => async (
 ) => {
   try {
     const option = {
-      baseURL: process.env.REACT_APP_API,
       method: "POST",
       url: "posts",
       data,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${localStorage.getItem(
-          "access_token"
-        )}`,
-      },
     };
-    const res = await axios(option);
+    const res = await httpRequest(option);
     dispatch({
       type: "ADD_POST",
       payload: res.data.data.post,
@@ -90,7 +82,6 @@ export const updateAvatarAction = (formData) => async (
       method: "POST",
     };
     const res = await httpRequest(option);
-    console.log(res.data.avatar);
     dispatch({
       type: "SET_USER_AVATAR_UPDATE",
       payload: res.data.avatar,
@@ -102,17 +93,17 @@ export const updateAvatarAction = (formData) => async (
 
 export const deletePost = (postId) => async (dispatch) => {
   try {
+    console.log(postId);
+    
     const option = {
-      baseURL: process.env.REACT_APP_API,
       url: `posts/${postId}`,
       method: "DELETE",
-      headers: {
-        Authorization: `${localStorage.getItem(
-          "access_token"
-        )}`,
-      },
     };
-    const res = await axios(option);
+
+    const res = await httpRequest(option);
+
+    console.log(res);
+
     dispatch({
       type: "DELETE_POST",
       payload: postId,

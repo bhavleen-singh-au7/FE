@@ -47,7 +47,7 @@ const ImgMediaCard = ({
   addUserLike,
   removeUserLike,
   post: { _id, caption, comments, likes, image },
-  user: { avatar, username },
+  user,
 }) => {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
@@ -55,7 +55,7 @@ const ImgMediaCard = ({
   const [like, setLike] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const modalBody = (
+  const modalBody = user ? (
     <div style={modalStyle} className={classes.paper}>
       <Grid container style={{ display: "flex" }}>
         <Grid item xs={6}>
@@ -76,8 +76,8 @@ const ImgMediaCard = ({
               <Avatar
                 alt="AvatarImage"
                 src={
-                  avatar
-                    ? avatar.imageUrl
+                  user.avatar
+                    ? user.avatar.imageUrl
                     : "https://flyinryanhawks.org/wp-content/uploads/2016/08/profile-placeholder.png"
                 }
               />
@@ -89,7 +89,7 @@ const ImgMediaCard = ({
                   marginRight: "8px",
                 }}
               >
-                {username}
+                {user.username}
               </h4>
             </Grid>
             <Grid
@@ -111,27 +111,10 @@ const ImgMediaCard = ({
           <DeleteDialog
             open={dialogOpen}
             setDialogOpen={setDialogOpen}
+            postId={_id}
           />
 
           <hr />
-
-          <Grid container>
-            <Grid item={2} style={{ marginRight: "10px" }}>
-              <Avatar
-                alt="AvatarImage"
-                src={
-                  avatar
-                    ? avatar.imageUrl
-                    : "https://flyinryanhawks.org/wp-content/uploads/2016/08/profile-placeholder.png"
-                }
-              />
-            </Grid>
-            <Grid item={10}>
-              <h4 style={{ marginTop: "8px" }}>
-                {username}
-              </h4>
-            </Grid>
-          </Grid>
 
           <p>
             <strong>Caption: </strong>
@@ -198,36 +181,38 @@ const ImgMediaCard = ({
         </Grid>
       </Grid>
     </div>
-  );
+  ) : null;
 
   return (
-    <Fragment>
-      <Suspense>
-        <IconButton onClick={() => setOpen(true)}>
-          <div className="container">
-            <ReactImageAppear
-              src={image.imageUrl}
-              alt="Avatar"
-              className="image"
-              style={{ width: "100%" }}
-              loader={LoaderImage}
-            />
-            <div className="middle">
-              <div className="text">
-                <FavoriteOutlinedIcon /> {likes.length}
-                <AddCommentIcon
-                  style={{ margin: "10px" }}
-                />
-                {comments.length}
+    user && (
+      <Fragment>
+        <Suspense>
+          <IconButton onClick={() => setOpen(true)}>
+            <div className="container">
+              <ReactImageAppear
+                src={image.imageUrl}
+                alt="Avatar"
+                className="image"
+                style={{ width: "100%" }}
+                loader={LoaderImage}
+              />
+              <div className="middle">
+                <div className="text">
+                  <FavoriteOutlinedIcon /> {likes.length}
+                  <AddCommentIcon
+                    style={{ margin: "10px" }}
+                  />
+                  {comments.length}
+                </div>
               </div>
             </div>
-          </div>
-        </IconButton>
-      </Suspense>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        {modalBody}
-      </Modal>
-    </Fragment>
+          </IconButton>
+        </Suspense>
+        <Modal open={open} onClose={() => setOpen(false)}>
+          {modalBody}
+        </Modal>
+      </Fragment>
+    )
   );
 };
 

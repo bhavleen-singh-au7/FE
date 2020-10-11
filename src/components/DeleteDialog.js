@@ -10,6 +10,8 @@ import {
   DialogTitle,
   Slide,
 } from "@material-ui/core";
+import { connect } from "react-redux";
+import { deletePost } from "../redux/actions/profileActions";
 
 const Transition = forwardRef(function Transition(
   props,
@@ -18,12 +20,19 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogSlide({
+const AlertDialogSlide = ({
   open,
   setDialogOpen,
-}) {
-  const handleClose = ({ open }) => {
+  postId,
+  setDeletePost,
+}) => {
+  const handleClose = () => {
     setDialogOpen(false);
+  };
+
+  const handleClick = async () => {
+    await setDeletePost(postId);
+    handleClose();
   };
 
   return (
@@ -52,8 +61,8 @@ export default function AlertDialogSlide({
 
           <Button
             variant="outlined"
-            // onClick={deletePost(_id)}
-            onClick={handleClose}
+            onClick={handleClick}
+            // onClick={handleClose}
             color="secondary"
           >
             Yes, Delete My Post.
@@ -62,4 +71,15 @@ export default function AlertDialogSlide({
       </Dialog>
     </Fragment>
   );
-}
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setDeletePost: (postId) => dispatch(deletePost(postId)),
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AlertDialogSlide);
