@@ -76,14 +76,8 @@ const Navbar = (props) => {
                 <Button
                   variant="contained"
                   onClick={handleClick}
-                  style={{
-                    backgroundColor: "#212121",
-                  }}
                 >
-                  <Typography
-                    variant="button"
-                    style={{ color: "#fff" }}
-                  >
+                  <Typography variant="button">
                     Signout
                   </Typography>
                 </Button>
