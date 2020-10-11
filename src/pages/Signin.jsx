@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Signin = ({ setUser, error, user, removeLoginError, isAuth }) => {
+const Signin = ({ setUser, error, removeLoginError, isAuth }) => {
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
@@ -84,8 +84,8 @@ const Signin = ({ setUser, error, user, removeLoginError, isAuth }) => {
     };
 
     // Button Submit Event
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         setValues({ ...values });
         setOpen(true);
         await setUser({ email, password });

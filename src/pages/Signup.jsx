@@ -16,6 +16,7 @@ import {
   Visibility,
   VisibilityOff,
 } from "@material-ui/icons";
+import Loader from "../components/Loader";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -33,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
   mb: {
     marginBottom: theme.spacing(4),
   },
+  loader: {
+    marginLeft: "7.5rem",
+    marginBottom: "1.5rem",
+  },
 }));
 
 const Signup = ({ history }) => {
@@ -43,11 +48,12 @@ const Signup = ({ history }) => {
     name: "",
     email: "",
     password: "",
-    buttonText: "Sign Up",
     showPassword: false,
   });
 
   const [errors, setErrors] = useState({});
+
+  const [open, setOpen] = useState(false);
 
   const {
     username,
@@ -55,7 +61,6 @@ const Signup = ({ history }) => {
     email,
     password,
     showPassword,
-    buttonText,
   } = values;
 
   const handleChange = (name) => (event) => {
@@ -106,9 +111,10 @@ const Signup = ({ history }) => {
   };
 
   // Button Submit Event
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setValues({ ...values, buttonText: "Signing Up" });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setValues({ ...values });
+    setOpen(true);
 
     Axios({
       method: "POST",
@@ -116,16 +122,15 @@ const Signup = ({ history }) => {
       data: { username, name, email, password },
     })
       .then((response) => {
-        console.log(response);
-
         setValues({
           ...values,
           username: "",
           name: "",
           email: "",
           password: "",
-          buttonText: "Submitted",
         });
+
+        setOpen(false);
 
         toast.success(response.data.message);
 
@@ -134,8 +139,7 @@ const Signup = ({ history }) => {
         }, 3000);
       })
       .catch((error) => {
-        setValues({ ...values, buttonText: "Sign up" });
-        console.log(error);
+        setValues({ ...values });
         toast.error(error.response.data.error);
       });
   };
@@ -196,14 +200,20 @@ const Signup = ({ history }) => {
           }}
         />
 
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          onClick={handleSubmit}
-        >
-          {buttonText}
-        </Button>
+        {open ? (
+          <div className={classes.loader}>
+            <Loader />
+          </div>
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={handleSubmit}
+          >
+            Sign Up
+          </Button>
+        )}
       </form>
     </Paper>
   );

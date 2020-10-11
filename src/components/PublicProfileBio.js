@@ -24,10 +24,6 @@ const UserBio = ({
     nameBioStyles,
   } = classes;
 
-  if (user) {
-    const id = user._id;
-  }
-
   return (
     user &&
     (loggedInUser._id === userId ? (

@@ -104,7 +104,7 @@ const Landing = () => {
               <Typed
                 strings={[
                   "Simple, Secure, Reliable Social Media Platform",
-                  "Connect & Share with the People in your life.",
+                  "Connect and Share with the People in your life.",
                   "Be together, whenever",
                 ]}
                 typeSpeed={40}

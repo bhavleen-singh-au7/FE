@@ -23,8 +23,6 @@ import { connect } from "react-redux";
 import CommentForm from "./CommentForm";
 import SingleComment from "./SingleComment";
 import { Link } from "react-router-dom";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
-import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 
 const useStyles = makeStyles(() => ({
   root: {

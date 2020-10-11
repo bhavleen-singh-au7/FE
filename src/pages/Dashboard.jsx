@@ -6,41 +6,44 @@ import MainCard from "../components/MainCard";
 import Progress from "../components/Progress";
 
 const Dashboard = ({ posts, setPosts }) => {
-    useEffect(() => {
-        setPosts();
-    }, [setPosts]);
+  useEffect(() => {
+    setPosts();
+  }, [setPosts]);
 
-    const render = posts ? (
-        <Fragment>
-            <Grid container direction="row">
-                <Grid item md={3} sm={2} xs={1}></Grid>
-                <Grid item md={6} sm={8} xs={10}>
-                    {posts &&
-                        posts.map((post) => (
-                            <MainCard key={post._id} post={post} />
-                        ))}
-                </Grid>
-            </Grid>
-        </Fragment>
-    ) : (
-        <Progress />
-    );
+  const render = posts ? (
+    <Fragment>
+      <Grid container direction="row">
+        <Grid item md={3} sm={2} xs={1}></Grid>
+        <Grid item md={6} sm={8} xs={10}>
+          {posts &&
+            posts.map((post) => (
+              <MainCard key={post._id} post={post} />
+            ))}
+        </Grid>
+      </Grid>
+    </Fragment>
+  ) : (
+    <Progress />
+  );
 
-    return render;
+  return render;
 };
 
 const mapStateToProps = (state) => {
-    return {
-        posts: state.publicRoot.posts,
-    };
+  return {
+    posts: state.publicRoot.posts,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        setPosts: () => {
-            dispatch(setFollowedPosts());
-        },
-    };
+  return {
+    setPosts: () => {
+      dispatch(setFollowedPosts());
+    },
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);
