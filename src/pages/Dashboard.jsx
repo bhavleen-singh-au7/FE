@@ -15,6 +15,7 @@ const Dashboard = ({ posts, setPosts }) => {
       <Grid container direction="row">
         <Grid item md={3} sm={2} xs={1}></Grid>
         <Grid item md={6} sm={8} xs={10}>
+          {console.log(posts)}
           {posts &&
             posts.map((post) => (
               <MainCard key={post._id} post={post} />

@@ -81,9 +81,12 @@ export const updateAvatarAction = (formData) => async (
       method: "POST",
     };
     const res = await httpRequest(option);
+
+    // console.log(res.data);
+
     dispatch({
       type: "SET_USER_AVATAR_UPDATE",
-      payload: res.data.avatar,
+      payload: res.data.data,
     });
   } catch (e) {
     console.log(e);

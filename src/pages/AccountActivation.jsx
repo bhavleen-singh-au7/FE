@@ -42,9 +42,7 @@ const AccountActivation = ({ match, history }) => {
     }
   }, []);
 
-  // const name = "bhavleen";
   const { name, token } = values;
-  // const { token } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
