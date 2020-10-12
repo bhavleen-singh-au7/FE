@@ -48,8 +48,6 @@ const MainCards = ({
   const [expanded, setExpanded] = useState(false);
   const [like, setLike] = useState(true);
 
-  console.log(owner);
-
   return (
     owner && (
       <Fragment>

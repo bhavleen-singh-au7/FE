@@ -66,16 +66,6 @@ const TransitionsModal = () => {
 
   return (
     <div>
-      {/* <IconButton
-                aria-label="upload picture"
-                component="span"
-                onClick={handleOpen}
-                style={{ fontSize: 40 }}
-                shadow-4
-                className={cx(classes.absolute)}
-            >
-                <AddIcon />
-            </IconButton> */}
       <div>
         <input
           onChange={handleChange}
@@ -113,17 +103,6 @@ const TransitionsModal = () => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            {/* <TextField
-                            id="standard-multiline-static"
-                            multiline
-                            rows={3}
-                            fullwidth
-                            style={{
-                                display: "block",
-                                marginBottom: '4%'
-                            }}
-                            placeholder="What's up dude??"
-                        /> */}
             <TextField
               id="standard-full-width"
               label="Label"
