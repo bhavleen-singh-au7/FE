@@ -6,7 +6,6 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-
 import UploadDialog from "../components/UploadDialog";
 import { setProfile } from "../redux/actions/profileActions";
 import UserBio from "../components/UserBio";

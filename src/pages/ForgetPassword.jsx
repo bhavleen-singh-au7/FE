@@ -61,7 +61,6 @@ const ForgetPassword = ({ history }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setValues({ ...values });
     setOpen(true);
 
     axios({

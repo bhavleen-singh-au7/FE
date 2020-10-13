@@ -12,6 +12,7 @@ import {
 import { toast } from "react-toastify";
 import Axios from "axios";
 import jwt from "jsonwebtoken";
+import Loader from "../components/Loader";
 
 const useStyles = makeStyles((theme) => ({
   nameStyle: {
@@ -24,10 +25,15 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(5),
     textAlign: "center",
   },
+  loader: {
+    marginLeft: "7.5rem",
+    marginBottom: "1.5rem",
+  },
 }));
 
 const AccountActivation = ({ match, history }) => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
   const [values, setValues] = useState({
     name: "",
     token: "",
@@ -38,7 +44,6 @@ const AccountActivation = ({ match, history }) => {
     let { name } = jwt.decode(token);
     if (token) {
       setValues({ ...values, name, token });
-      // setValues({ ...values, token });
     }
   }, []);
 
@@ -46,6 +51,8 @@ const AccountActivation = ({ match, history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setOpen(true);
+
     Axios({
       method: "POST",
       url: `${process.env.REACT_APP_API}/account-activation`,
@@ -53,13 +60,15 @@ const AccountActivation = ({ match, history }) => {
     })
       .then((response) => {
         toast.success(response.data.message);
+        setOpen(false);
 
         setTimeout(() => {
           history.push("/signin");
-        }, 4000);
+        }, 3000);
       })
       .catch((error) => {
         toast.error(error.response.data.error);
+        setOpen(false);
       });
   };
 
@@ -71,13 +80,19 @@ const AccountActivation = ({ match, history }) => {
         <span className={classes.nameStyle}>{name}</span>,
         Ready to activate your account?
       </h3>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleSubmit}
-      >
-        Activate Account
-      </Button>
+      {open ? (
+        <div className={classes.loader}>
+          <Loader />
+        </div>
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+        >
+          Activate Account
+        </Button>
+      )}
     </Paper>
   );
 

@@ -102,7 +102,7 @@ const Signup = ({ history }) => {
       temp.password =
         password.length > 5
           ? ""
-          : "Minimum 6 characters are required.";
+          : "Minimum 7 characters are required.";
 
     setErrors({ ...temp });
 

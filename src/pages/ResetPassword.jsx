@@ -20,6 +20,7 @@ import {
   Visibility,
   VisibilityOff,
 } from "@material-ui/icons";
+import Loader from "../components/Loader";
 
 const useStyles = makeStyles((theme) => ({
   nameStyle: {
@@ -35,16 +36,20 @@ const useStyles = makeStyles((theme) => ({
   mb: {
     marginBottom: theme.spacing(5),
   },
+  loader: {
+    marginLeft: "7.5rem",
+    marginBottom: "1.5rem",
+  },
 }));
 
-const ResetPassword = ({ match }) => {
+const ResetPassword = ({ match, history }) => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
 
   const [values, setValues] = useState({
     name: "",
     token: "",
     newPassword: "",
-    buttonText: "Reset Password",
     showPassword: false,
   });
 
@@ -58,13 +63,7 @@ const ResetPassword = ({ match }) => {
 
   const [errors, setErrors] = useState({});
 
-  const {
-    name,
-    token,
-    newPassword,
-    showPassword,
-    buttonText,
-  } = values;
+  const { name, token, newPassword, showPassword } = values;
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
@@ -96,12 +95,9 @@ const ResetPassword = ({ match }) => {
       return Object.values(temp).every((x) => x === "");
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setValues({
-      ...values,
-      buttonText: "Submitting",
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setOpen(true);
 
     axios({
       method: "PUT",
@@ -110,17 +106,15 @@ const ResetPassword = ({ match }) => {
     })
       .then((response) => {
         toast.success(response.data.message);
-        setValues({
-          ...values,
-          buttonText: "Done",
-        });
+        setOpen(false);
+
+        setTimeout(() => {
+          history.push("/signin");
+        }, 3000);
       })
       .catch((error) => {
         toast.error(error.response.data.error);
-        setValues({
-          ...values,
-          buttonText: "Reset Password",
-        });
+        setOpen(false);
       });
   };
 
@@ -158,14 +152,20 @@ const ResetPassword = ({ match }) => {
             ),
           }}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.mb}
-          onClick={handleSubmit}
-        >
-          {buttonText}
-        </Button>
+        {open ? (
+          <div className={classes.loader}>
+            <Loader />
+          </div>
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.mb}
+            onClick={handleSubmit}
+          >
+            Reset Password
+          </Button>
+        )}
       </form>
     </Paper>
   );

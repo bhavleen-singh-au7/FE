@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { setFollowedPosts } from "../redux/actions/postActions";
 import MainCard from "../components/MainCard";
 import Progress from "../components/Progress";
+import UserDataTab from "../components/UserDataTab";
 
 const Dashboard = ({ posts, setPosts }) => {
   useEffect(() => {
@@ -13,12 +14,15 @@ const Dashboard = ({ posts, setPosts }) => {
   const render = posts ? (
     <Fragment>
       <Grid container direction="row">
-        <Grid item md={3} sm={2} xs={1}></Grid>
-        <Grid item md={6} sm={8} xs={10}>
+        <Grid item md={2} sm={1}></Grid>
+        <Grid item md={6} sm={7}>
           {posts &&
             posts.map((post) => (
               <MainCard key={post._id} post={post} />
             ))}
+        </Grid>
+        <Grid item md={2} sm={3}>
+          <UserDataTab />
         </Grid>
       </Grid>
     </Fragment>

@@ -19,7 +19,10 @@ export const setUserLogin = (userData) => {
         payload: res.data.user,
       });
     } catch (e) {
-      console.log(e);
+      dispatch({
+        type: "SET_LOGIN_ERROR",
+        payload: e.response.data.error,
+      });
     }
   };
 };
