@@ -119,6 +119,7 @@ function UserProfile({ isAuth, setProfileData, profile }) {
         <ProfileTab
           posts={profile.posts}
           gridImg={gridImg}
+          user={profile.user}
         />
       </Grid>
       <Grid item xs={2}></Grid>

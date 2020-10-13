@@ -108,7 +108,7 @@ const ForgetPassword = ({ history }) => {
             variant="contained"
             color="primary"
             className={classes.mb}
-            onClick={handleSubmit}
+            type="submit"
           >
             Request Password Reset Link
           </Button>

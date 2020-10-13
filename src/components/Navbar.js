@@ -35,9 +35,6 @@ const Navbar = (props) => {
         position="fixed"
         color="inherit"
         className="navContainer"
-        style={{
-          boxShadow: "none",
-        }}
       >
         <Toolbar>
           <Typography variant="h4" className="navTitle">

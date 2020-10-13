@@ -127,7 +127,7 @@ const ResetPassword = ({ match, history }) => {
       >
         Enter your New Secure Password.
       </Typography>
-      <form autoComplete="off">
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <MuiInput
           label="New Password"
           name="newPassword"
@@ -161,7 +161,7 @@ const ResetPassword = ({ match, history }) => {
             variant="contained"
             color="primary"
             className={classes.mb}
-            onClick={handleSubmit}
+            type="submit"
           >
             Reset Password
           </Button>

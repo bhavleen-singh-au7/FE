@@ -157,7 +157,7 @@ const Signin = ({
             color="primary"
             fullWidth
             className={classes.mb}
-            onClick={handleSubmit}
+            type="submit"
           >
             Log In
           </Button>

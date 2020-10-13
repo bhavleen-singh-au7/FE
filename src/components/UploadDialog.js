@@ -124,7 +124,7 @@ function FormDialog({
               multiline
               rows={4}
               variant="outlined"
-              placeholder="what's new with you ?"
+              placeholder="Give a Caption Here"
               fullwidth={true}
               onChange={handleCaptionChange}
             />

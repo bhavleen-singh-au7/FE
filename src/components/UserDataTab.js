@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "3px",
     maxWidth: 200,
     boxShadow: "2px 2px 3px -2px rgba(0,0,0,0.75)",
+    position: "sticky",
+    top: theme.spacing(8),
   },
   avatar: {
     width: theme.spacing(14),
@@ -83,7 +86,8 @@ const UserDataTab = ({ user }) => {
           className={classes.ProfileButton}
           variant="outlined"
           size="small"
-          to={`/open/profile/:${user._id}`}
+          to="/profile"
+          component={Link}
         >
           Profile
         </Button>

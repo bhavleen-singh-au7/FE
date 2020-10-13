@@ -209,7 +209,7 @@ const Signup = ({ history }) => {
             variant="contained"
             color="primary"
             fullWidth
-            onClick={handleSubmit}
+            type="submit"
           >
             Sign Up
           </Button>

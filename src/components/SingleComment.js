@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SingleComment = ({
   postId,
-  comment: { _id, comment, name, userId },
+  comment: { _id, comment, name, userId, avatar },
   user,
   deleteUserComment,
 }) => {
@@ -42,7 +42,7 @@ const SingleComment = ({
           <Grid item sm={1}>
             <Avatar
               alt={name}
-              src={user.avatar && user.avatar.imageUrl}
+              src={avatar}
               className={classes.small}
             />
           </Grid>
@@ -82,9 +82,11 @@ const SingleComment = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.userRoot.user,
-});
+const mapStateToProps = (state) => {
+  return {
+    user: state.userRoot.user,
+  };
+};
 
 export default connect(mapStateToProps, {
   deleteUserComment,

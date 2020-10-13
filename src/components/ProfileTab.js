@@ -54,7 +54,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ScrollableTabsButtonAuto = ({ posts, gridImg }) => {
+const ScrollableTabsButtonAuto = ({
+  posts,
+  gridImg,
+  user,
+}) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -100,7 +104,7 @@ const ScrollableTabsButtonAuto = ({ posts, gridImg }) => {
                     />
                   }
                 >
-                  <ProfileCard post={post} />
+                  <ProfileCard post={post} user={user} />
                 </Suspense>
               </Grid>
             ))}
@@ -121,7 +125,7 @@ const ScrollableTabsButtonAuto = ({ posts, gridImg }) => {
                     />
                   }
                 >
-                  <ProfileCard post={post} />
+                  <ProfileCard post={post} user={user} />
                 </Suspense>
               </Grid>
             ))}
