@@ -9,6 +9,7 @@ import {
 import MuiInput from "../components/MuiInput";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -20,19 +21,22 @@ const useStyles = makeStyles((theme) => ({
   mb: {
     marginBottom: theme.spacing(5),
   },
+  loader: {
+    marginLeft: "7.5rem",
+    marginBottom: "1.5rem",
+  },
 }));
 
-const ForgetPassword = () => {
+const ForgetPassword = ({ history }) => {
   const classes = useStyles();
-
   const [errors, setErrors] = useState({});
+  const [open, setOpen] = useState(false);
 
   const [values, setValues] = useState({
     email: "",
-    buttonText: "Request Password Reset Link",
   });
 
-  const { email, buttonText } = values;
+  const { email } = values;
 
   // Validations
   const validate = (values) => {
@@ -55,9 +59,10 @@ const ForgetPassword = () => {
     validate({ [name]: event.target.value });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setValues({ ...values, buttonText: "Submitting" });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setValues({ ...values });
+    setOpen(true);
 
     axios({
       method: "PUT",
@@ -66,14 +71,16 @@ const ForgetPassword = () => {
     })
       .then((response) => {
         toast.success(response.data.message);
-        setValues({ ...values, buttonText: "Requested" });
+        setOpen(false);
+
+        setTimeout(() => {
+          history.push("/signin");
+        }, 3000);
       })
       .catch((error) => {
+        setValues({ ...values });
         toast.error(error.response.data.error);
-        setValues({
-          ...values,
-          buttonText: "Request Password Reset Link",
-        });
+        setOpen(false);
       });
   };
 
@@ -84,7 +91,7 @@ const ForgetPassword = () => {
         Enter your email and we will send you a password
         reset link.
       </Typography>
-      <form autoComplete="off">
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <MuiInput
           label="Email Address"
           name="email"
@@ -100,7 +107,7 @@ const ForgetPassword = () => {
           className={classes.mb}
           onClick={handleSubmit}
         >
-          {buttonText}
+          Request Password Reset Link
         </Button>
       </form>
     </Paper>

@@ -147,7 +147,7 @@ const Signup = ({ history }) => {
   const signupForm = () => (
     <Paper className={classes.form} elevation={3}>
       <h1 className="logo">PicHub</h1>
-      <form autoComplete="off">
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <MuiInput
           label="Username"
           name="username"
