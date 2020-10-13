@@ -116,7 +116,6 @@ const EditProfileForm = ({
   };
 
   const handleRemoveProfilePhoto = async (e) => {
-    console.log(user.avatar);
     if (
       user.avatar === undefined ||
       user.avatar.length === 0

@@ -56,9 +56,6 @@ const ImgMediaCard = ({
   const [like, setLike] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  console.log(owner);
-  console.log(user._id);
-
   let display;
 
   if (user && _id) {

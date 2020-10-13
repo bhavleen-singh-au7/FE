@@ -44,8 +44,6 @@ const UserDataTab = ({ user }) => {
   const classes = useStyles();
   const { root } = classes;
 
-  console.log(user);
-
   const ChannelPhoto = ({ classes }) => {
     return (
       <Avatar
