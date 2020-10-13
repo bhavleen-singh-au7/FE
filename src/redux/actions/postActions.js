@@ -206,8 +206,6 @@ export const deleteComment = (postId, commentId) => async (
       method: "DELETE",
     };
 
-    console.log(res);
-
     const res = await httpRequest(option);
 
     dispatch({
