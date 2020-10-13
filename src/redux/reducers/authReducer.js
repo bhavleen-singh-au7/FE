@@ -58,6 +58,14 @@ const userReducer = (state = initialState, action) => {
           avatar: action.payload,
         },
       };
+    case "DELETE_USER_AVATAR":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          avatar: [],
+        },
+      };
     default:
       return state;
   }

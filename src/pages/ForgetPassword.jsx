@@ -59,7 +59,7 @@ const ForgetPassword = ({ history }) => {
     validate({ [name]: event.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setValues({ ...values });
     setOpen(true);
@@ -78,7 +78,6 @@ const ForgetPassword = ({ history }) => {
         }, 3000);
       })
       .catch((error) => {
-        setValues({ ...values });
         toast.error(error.response.data.error);
         setOpen(false);
       });
@@ -101,14 +100,20 @@ const ForgetPassword = ({ history }) => {
           onChange={handleChange("email")}
           error={errors.email}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.mb}
-          onClick={handleSubmit}
-        >
-          Request Password Reset Link
-        </Button>
+        {open ? (
+          <div className={classes.loader}>
+            <Loader />
+          </div>
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.mb}
+            onClick={handleSubmit}
+          >
+            Request Password Reset Link
+          </Button>
+        )}
       </form>
     </Paper>
   );

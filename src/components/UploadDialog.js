@@ -39,7 +39,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function FormDialog({ uploadPost, setShowProgress }) {
+function FormDialog({
+  uploadPost,
+  setShowProgress,
+  setError,
+}) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -50,7 +54,7 @@ function FormDialog({ uploadPost, setShowProgress }) {
 
   const [previewFile, setPreviewFile] = useState(null);
   const [file, setFile] = useState(null);
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const [caption, setCaption] = useState("");
 
   const handleCaptionChange = (e) => {
@@ -66,7 +70,9 @@ function FormDialog({ uploadPost, setShowProgress }) {
       setError("");
       setOpen(true);
     } else {
-      setError("Please select an image file (png/jpeg)");
+      setError(
+        "Please select an image file (png/jpeg/jpg)"
+      );
       setFile(null);
     }
   };
@@ -84,7 +90,7 @@ function FormDialog({ uploadPost, setShowProgress }) {
     <Fragment>
       <input
         onChange={handleChange}
-        accept="image/*"
+        // accept="image/*"
         className={classes.input}
         id="icon-button-file"
         type="file"

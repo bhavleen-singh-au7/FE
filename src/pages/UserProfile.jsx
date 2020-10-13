@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Grid, LinearProgress } from "@material-ui/core";
+import {
+  Grid,
+  LinearProgress,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
@@ -48,11 +52,16 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "20px",
     textAlign: "center",
   },
+  errorStyle: {
+    margin: "auto",
+    marginTop: "10px",
+  },
 }));
 
 function UserProfile({ isAuth, setProfileData, profile }) {
   const classes = useStyles();
   const [showProgress, setShowProgress] = useState(false);
+  const [error, setError] = useState("");
 
   const { gridImg, photoUploadStyle } = classes;
 
@@ -80,8 +89,20 @@ function UserProfile({ isAuth, setProfileData, profile }) {
 
         {/* Photo upload Modal*/}
         <Grid item xs={12} className={photoUploadStyle}>
-          <UploadDialog setShowProgress={setShowProgress} />
+          <UploadDialog
+            setShowProgress={setShowProgress}
+            setError={setError}
+          />
         </Grid>
+        {error && (
+          <Typography
+            variant="caption"
+            color="error"
+            className={classes.errorStyle}
+          >
+            {error}
+          </Typography>
+        )}
 
         {/* Uploading Loader */}
         {showProgress && (

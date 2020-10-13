@@ -14,6 +14,7 @@ import httpRequest from "../config/axiosConfig";
 import {
   updateUserAction,
   updateAvatarAction,
+  removeAvatarAction,
 } from "../redux/actions/profileActions";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
@@ -87,6 +88,7 @@ const EditProfileForm = ({
   user,
   updateUserProfile,
   updateAvatar,
+  removeAvatar,
 }) => {
   const classes = useStyles();
   const history = useHistory();
@@ -109,6 +111,20 @@ const EditProfileForm = ({
     } else {
       setError("Please select an image file (png/jpeg)");
       setFile(null);
+    }
+  };
+
+  const handleRemoveProfilePhoto = async (e) => {
+    console.log(user.avatar);
+    if (
+      user.avatar === undefined ||
+      user.avatar.length === 0
+    ) {
+      toast.error("No profile pic found !");
+    } else {
+      setOpen(true);
+      await removeAvatar();
+      setOpen(false);
     }
   };
 
@@ -232,19 +248,33 @@ const EditProfileForm = ({
               Change Profile Photo
             </Typography>
           </label>
-          <Link
-            style={{ marginLeft: "20px" }}
-            to="/forget-password"
+
+          <Typography
+            variant="overline"
+            display="inline"
             className={classes.label}
+            style={{
+              marginLeft: "10px",
+            }}
+            onClick={handleRemoveProfilePhoto}
           >
-            <Typography
-              variant="overline"
-              display="inline"
+            Remove Profile Photo
+          </Typography>
+
+          <div>
+            <Link
+              to="/forget-password"
               className={classes.label}
             >
-              Change Password
-            </Typography>
-          </Link>
+              <Typography
+                variant="overline"
+                display="inline"
+                className={classes.label}
+              >
+                Change Password
+              </Typography>
+            </Link>
+          </div>
         </Grid>
         <Grid item xs={1}></Grid>
       </Grid>
@@ -370,6 +400,7 @@ const mapDispatchToprops = (dispatch) => {
       dispatch(updateUserAction(data)),
     updateAvatar: (formData) =>
       dispatch(updateAvatarAction(formData)),
+    removeAvatar: () => dispatch(removeAvatarAction()),
   };
 };
 

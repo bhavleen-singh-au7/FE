@@ -112,3 +112,21 @@ export const deletePost = (postId) => async (dispatch) => {
     console.log(e);
   }
 };
+
+export const removeAvatarAction = () => async (
+  dispatch
+) => {
+  try {
+    const option = {
+      url: "user/me/avatar",
+      method: "DELETE",
+    };
+    const res = await httpRequest(option);
+    console.log(res);
+    dispatch({
+      type: "DELETE_USER_AVATAR",
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
