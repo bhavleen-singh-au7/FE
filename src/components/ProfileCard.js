@@ -27,7 +27,7 @@ const getModalStyle = () => {
     top: "10%",
     left: "10%",
     width: "80vw",
-    height: "85vh",
+    height: "80vh",
   };
 };
 
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 const ImgMediaCard = ({
   addUserLike,
   removeUserLike,
-  post: { _id, caption, comments, likes, image },
+  post: { _id, caption, comments, likes, image, owner },
   user,
 }) => {
   const classes = useStyles();
@@ -99,11 +99,13 @@ const ImgMediaCard = ({
                 right: "20px",
               }}
             >
-              <IconButton
-                onClick={() => setDialogOpen(true)}
-              >
-                <DeleteForeverIcon color="secondary" />
-              </IconButton>
+              {owner !== user._id && (
+                <IconButton
+                  onClick={() => setDialogOpen(true)}
+                >
+                  <DeleteForeverIcon color="secondary" />
+                </IconButton>
+              )}
             </Grid>
           </Grid>
 
@@ -215,11 +217,7 @@ const ImgMediaCard = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.userRoot.user,
-});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   addUserLike,
   removeUserLike,
 })(ImgMediaCard);

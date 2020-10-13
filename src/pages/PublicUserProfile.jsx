@@ -14,104 +14,117 @@ const ProfileCard = lazy(() =>
 );
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: "100%",
-        "& > * + *": {
-            marginTop: theme.spacing(2),
-        },
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
     },
-    typographyStyles: {
-        fontWeight: 500,
-        display: "inline",
-        marginRight: "8%",
-    },
-    usernameStyles: {
-        fontFamily: 'Montserrat',
-        fontWeight: "300",
-        fontSize: "1.8rem",
-        margin: "0.9rem 0 1.5rem 0",
-    },
-    nameBioStyles: {
-        fontSize: "15px",
-        fontWeight: "500"
-    },
-    lowFontWeightStyles: {
-        fontWeight: 200,
-        fontSize: "0.9rem",
-    },
-    imgCenter: {
-        textAlign: "center",
-    },
-    gridImg: {
-        marginTop: "40px",
-    },
-    input: {
-        display: "none",
-    },
-    photoUploadStyle: {
-        marginTop: "20px",
-        textAlign: "center",
-    },
+  },
+  typographyStyles: {
+    fontWeight: 500,
+    display: "inline",
+    marginRight: "8%",
+  },
+  usernameStyles: {
+    fontFamily: "Montserrat",
+    fontWeight: "300",
+    fontSize: "1.8rem",
+    margin: "0.9rem 0 1.5rem 0",
+  },
+  nameBioStyles: {
+    fontSize: "15px",
+    fontWeight: "500",
+  },
+  lowFontWeightStyles: {
+    fontWeight: 200,
+    fontSize: "0.9rem",
+  },
+  imgCenter: {
+    textAlign: "center",
+  },
+  gridImg: {
+    marginTop: "40px",
+  },
+  input: {
+    display: "none",
+  },
+  photoUploadStyle: {
+    marginTop: "20px",
+    textAlign: "center",
+  },
 }));
 
 function UserProfile({ setProfile, publicProfile }) {
-    const classes = useStyles();
-    const { gridImg } = classes;
+  const classes = useStyles();
+  const { gridImg } = classes;
 
-    const { userId } = useParams();
-    useEffect(() => {
-        setProfile(userId);
-    }, [setProfile, userId]);
+  const { userId } = useParams();
+  useEffect(() => {
+    setProfile(userId);
+  }, [setProfile, userId]);
 
-    return publicProfile ? (
-        <Grid container style={{ marginTop: "20px"}}>
-            <Grid item md={2}></Grid>
-            <Grid container item md={8} xs={12} direction="column">
-                {/* Users Bio */}
-                <PublicProfileBio
+  return publicProfile ? (
+    <Grid container style={{ marginTop: "20px" }}>
+      <Grid item md={2}></Grid>
+      <Grid
+        container
+        item
+        md={8}
+        xs={12}
+        direction="column"
+      >
+        {/* Users Bio */}
+        <PublicProfileBio
+          user={publicProfile.user}
+          classes={classes}
+          postCount={publicProfile.posts}
+          userId={userId}
+        />
+
+        {/* User Posts */}
+        <Grid container item xs={12} className={gridImg}>
+          {publicProfile.posts &&
+            publicProfile.posts.map((post) => (
+              <Grid item xs={4} key={post._id}>
+                <Suspense
+                  fallback={
+                    <img
+                      src={LoaderImage}
+                      alt="loader_image"
+                      width={345}
+                    />
+                  }
+                >
+                  <ProfileCard
+                    post={post}
                     user={publicProfile.user}
-                    classes={classes}
-                    postCount={publicProfile.posts}
-                    userId={userId}
-                />
-
-                {/* User Posts */}
-                <Grid container item xs={12} className={gridImg}  >
-                    {publicProfile.posts &&
-                        publicProfile.posts.map((post) => (
-                            <Grid item xs={4} key={post._id}>
-                                <Suspense
-                                    fallback={
-                                        <img
-                                            src={LoaderImage}
-                                            alt="loader_image"
-                                            width={345}
-                                        />
-                                    }
-                                >
-                            <ProfileCard post={post} />
-                                </Suspense>
-                            </Grid>
-                        ))}
-                </Grid>
-            </Grid>
-            <Grid item xs={2}></Grid>
+                  />
+                </Suspense>
+              </Grid>
+            ))}
         </Grid>
-    ) : (
-        <Progress />
-    );
+      </Grid>
+      <Grid item xs={2}></Grid>
+    </Grid>
+  ) : (
+    <Progress />
+  );
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        setProfile: (userId) => dispatch(setPublicProfileData(userId)),
-    };
+  return {
+    setProfile: (userId) =>
+      dispatch(setPublicProfileData(userId)),
+  };
 };
 
 const mapStateToProps = (state) => {
-    return {
-        publicProfile: state.publicRoot.publicProfile,
-    };
+  return {
+    publicProfile: state.publicRoot.publicProfile,
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserProfile);

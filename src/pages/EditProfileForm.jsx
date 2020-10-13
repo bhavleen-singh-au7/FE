@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
   label: {
     color: "#efb6b2",
     fontWeight: "700",
+    textDecoration: "none",
     "&:hover": {
       cursor: "pointer",
       fontWeight: "500",
