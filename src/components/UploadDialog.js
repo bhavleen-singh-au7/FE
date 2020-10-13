@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import {
   Button,
   Dialog,
@@ -17,7 +17,7 @@ import AddIcon from "@material-ui/icons/Add";
 import cx from "classnames";
 import { createPost } from "../redux/actions/profileActions";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     "& .MuiSvgIcon-root": {
       marginTop: "5px",
@@ -39,11 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function FormDialog({
-  isAuth,
-  uploadPost,
-  setShowProgress,
-}) {
+function FormDialog({ uploadPost, setShowProgress }) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -85,36 +81,34 @@ function FormDialog({
   };
 
   return (
-    <div>
-      <div>
-        <input
-          onChange={handleChange}
-          accept="image/*"
-          className={classes.input}
-          id="icon-button-file"
-          type="file"
-        />
-        <Tooltip
-          className={classes.root}
-          TransitionComponent={Fade}
-          TransitionProps={{ timeout: 600 }}
-          title="Upload a photo"
-          aria-label="add"
-        >
-          <Fab className={cx(classes.absolute)}>
-            <label htmlFor="icon-button-file">
-              <AddIcon />
-            </label>
-          </Fab>
-        </Tooltip>
-      </div>
+    <Fragment>
+      <input
+        onChange={handleChange}
+        accept="image/*"
+        className={classes.input}
+        id="icon-button-file"
+        type="file"
+      />
+      <Tooltip
+        className={classes.root}
+        TransitionComponent={Fade}
+        TransitionProps={{ timeout: 600 }}
+        title="Upload a photo"
+        aria-label="add"
+      >
+        <Fab className={cx(classes.absolute)}>
+          <label htmlFor="icon-button-file">
+            <AddIcon />
+          </label>
+        </Fab>
+      </Tooltip>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          Subscribe
+          New Post
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -125,9 +119,6 @@ function FormDialog({
               rows={4}
               variant="outlined"
               placeholder="what's new with you ?"
-              // style={{
-              //     display: block
-              // }}
               fullwidth={true}
               onChange={handleCaptionChange}
             />
@@ -138,7 +129,6 @@ function FormDialog({
               src={previewFile}
               alt="uploaded"
               width={550}
-              // height="40%"
             ></img>
           )}
         </DialogContent>
@@ -151,7 +141,7 @@ function FormDialog({
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Fragment>
   );
 }
 

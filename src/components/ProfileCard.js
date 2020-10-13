@@ -99,11 +99,10 @@ const ImgMediaCard = ({
                 right: "20px",
               }}
             >
-              <IconButton>
-                <DeleteForeverIcon
-                  color="secondary"
-                  onClick={() => setDialogOpen(true)}
-                />
+              <IconButton
+                onClick={() => setDialogOpen(true)}
+              >
+                <DeleteForeverIcon color="secondary" />
               </IconButton>
             </Grid>
           </Grid>

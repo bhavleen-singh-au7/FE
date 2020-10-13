@@ -31,7 +31,7 @@ const SingleComment = ({
   postId,
   comment: { _id, comment, name, userId },
   user,
-  deleteComment,
+  deleteUserComment,
 }) => {
   const classes = useStyles();
 
