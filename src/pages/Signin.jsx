@@ -134,8 +134,7 @@ const Signin = ({
             endAdornment: (
               <InputAdornment>
                 <IconButton
-                  onClick={handleClickShowPassword}
-                >
+                  onClick={handleClickShowPassword}>
                   {values.showPassword ? (
                     <Visibility />
                   ) : (
@@ -157,8 +156,7 @@ const Signin = ({
             color="primary"
             fullWidth
             className={classes.mb}
-            type="submit"
-          >
+            type="submit">
             Log In
           </Button>
         )}
@@ -183,8 +181,7 @@ const Signin = ({
         justify="center"
         style={{
           minHeight: "90vh",
-        }}
-      >
+        }}>
         <Grid
           item
           xs={12}
@@ -192,8 +189,7 @@ const Signin = ({
           className="bg"
           style={{
             minHeight: "90vh",
-          }}
-        >
+          }}>
           <img
             src="https://res.cloudinary.com/dnja3kt1q/image/upload/v1602294502/logo/login_inx93e.png"
             alt="loginsvg"
@@ -204,12 +200,23 @@ const Signin = ({
           {loginForm()}
           <Paper
             className={classes.formBottom}
-            variant="outlined"
-          >
+            variant="outlined">
             Don't have an account?{" "}
             <Link className="link" to="/signup">
               Sign Up
             </Link>
+          </Paper>
+          <Paper
+            className={classes.formBottom}
+            elevation={3}>
+            <span
+              style={{ color: "red", fontWeight: "bold" }}>
+              For Testing The App
+            </span>
+            <br />
+            email - singhbhavleen3@gmail.com
+            <br />
+            password - 1234567
           </Paper>
         </Grid>
       </Grid>
